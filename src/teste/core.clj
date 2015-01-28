@@ -27,6 +27,10 @@
 (defn sum-of-squares4 [v]
   (reduce + (amap v idx _ (let [item (aget v idx)] (* item item)))))
 
+(defn sum-of-squares5 [v]
+  (areduce (amap v idx _ (let [item (aget v idx)] (* item item)))
+           idx ret 0 (+ ret (aget v idx))))
+
 (def a (double-array (range 10)))
 
 (criterium/bench (sum-of-squares a))
@@ -34,3 +38,7 @@
 (criterium/bench (sum-of-squares2 a))
 
 (criterium/bench (sum-of-squares3 a))
+
+(criterium/bench (sum-of-squares4 a))
+
+(criterium/bench (sum-of-squares5 a))

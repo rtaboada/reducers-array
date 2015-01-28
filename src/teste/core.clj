@@ -24,21 +24,22 @@
   [v]
   (r/fold + (r/map #(* % %) v)))
 
-(defn sum-of-squares4 [v]
+(defn ^double sum-of-squares4 [^doubles v]
   (reduce + (amap v idx _ (let [item (aget v idx)] (* item item)))))
 
-(defn sum-of-squares5 [v]
-  (areduce (amap v idx _ (let [item (aget v idx)] (* item item)))
-           idx ret 0 (+ ret (aget v idx))))
+(defn ^double sum-of-squares5 [^doubles v]
+  (let [^doubles squares (amap v idx _ (let [item (aget v idx)] (* item item)))]
+    (areduce squares idx ret 0 (+ ret (aget squares idx)))))
 
 (def a (double-array (range 10)))
 
-(criterium/bench (sum-of-squares a))
+(comment
+  (criterium/quick-bench (sum-of-squares a))
 
-(criterium/bench (sum-of-squares2 a))
+  (criterium/quick-bench (sum-of-squares2 a))
 
-(criterium/bench (sum-of-squares3 a))
+  (criterium/quick-bench (sum-of-squares3 a))
 
-(criterium/bench (sum-of-squares4 a))
+  (criterium/quick-bench (sum-of-squares4 a))
 
-(criterium/bench (sum-of-squares5 a))
+  (criterium/quick-bench (sum-of-squares5 a)))

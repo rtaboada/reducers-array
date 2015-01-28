@@ -24,6 +24,9 @@
   [v]
   (r/fold + (r/map #(* % %) v)))
 
+(defn sum-of-squares4 [v]
+  (reduce + (amap v idx _ (let [item (aget v idx)] (* item item)))))
+
 (def a (double-array (range 10)))
 
 (criterium/bench (sum-of-squares a))

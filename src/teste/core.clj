@@ -31,6 +31,9 @@
   (let [^doubles squares (amap v idx _ (let [item (aget v idx)] (* item item)))]
     (areduce squares idx ret 0 (+ ret (aget squares idx)))))
 
+(defn ^double sum-of-squares6 [^doubles v]
+  (areduce v idx ret 0 (+ ret (let [item (aget v idx)] (* item item)))))
+
 (def a (double-array (range 10)))
 
 (comment

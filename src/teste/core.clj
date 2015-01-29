@@ -30,19 +30,19 @@
 (defn sum-of-squares5 [v]
   (reduce + (map #(* % %) v)))
 
-(defn ^double sum-of-squares6 [^doubles v]
+(defn sum-of-squares6 ^double [^doubles v]
   (reduce + (amap v idx _ (let [item (aget v idx)] (* item item)))))
 
-(defn ^double sum-of-squares7 [^doubles v]
+(defn sum-of-squares7 ^double [^doubles v]
   (let [^doubles squares (amap v idx _ (let [item (aget v idx)] (* item item)))]
     (areduce squares idx ret 0.0 (+ ret (aget squares idx)))))
 
-(defn ^double sum-of-squares7 [^doubles v]
+(defn sum-of-squares7 ^double [^doubles v]
   (areduce v idx ret 0.0
            (let [item (aget v idx)]
              (+ ret (* item item)))))
 
-(defn ^double sum-of-squares8 [^doubles v]
+(defn sum-of-squares8 ^double [^doubles v]
   (areduce v idx ret 0.0
            (let [item (aget v idx)]
              (unchecked-add ret (unchecked-multiply item item)))))

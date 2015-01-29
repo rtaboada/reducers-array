@@ -24,10 +24,20 @@
   [v]
   (r/fold + (r/map #(* % %) v)))
 
-(def a (double-array (range 10)))
+(defn sum-of-squares4 [v]
+  (transduce (map #(* %1 %1)) + v))
 
-(criterium/bench (sum-of-squares a))
+(defn sum-of-squares5 [v]
+  (reduce + (map #(* % %) v)))
 
-(criterium/bench (sum-of-squares2 a))
+(def a (double-array (range 100000)))
+(def b (double-array (map #(* % %) a)))
 
-(criterium/bench (sum-of-squares3 a))
+(comment
+  (criterium/quick-bench (sum-of-squares a))
+
+  (criterium/quick-bench (sum-of-squares2 a))
+
+  (criterium/quick-bench (sum-of-squares3 a))
+
+  (criterium/quick-bench (sum-of-squares4 a)))

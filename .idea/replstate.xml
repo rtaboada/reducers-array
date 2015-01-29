@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ReplState" timestamp="1422396110365">{:repl-history {:ide [], :local [&quot;(use 'teste.core)&quot; &quot;\n(use 'teste.core)&quot; &quot;(set! *warn-on-reflection* true)&quot; &quot;(defn sum-of-squares [v] (r/fold + (r/map #(* %1 %1) v)))&quot; &quot;(require 'clojure.core.reducers :as r)&quot; &quot;(require '[clojure.core.reducers :as r])&quot; &quot;(defn sum-of-squares3 [v] (r/fold + (r/map #(* %1 %1) v)))&quot; &quot;(sum-of-squares3 a)&quot; &quot;(def s \&quot;tead\&quot;)&quot; &quot;(.toString s)&quot; &quot;(time (sum-of-squares2\n        a))&quot; &quot;(time (sum-of-squares\n        a))&quot; &quot;(time (sum-of-squares a))&quot; &quot;(time (sum-of-squares2 a))&quot; &quot;(time (sum-of-squares3 a))&quot; &quot;(sum-of-squares a)&quot; &quot;(sum-of-squares2 a)&quot;], :remote []}}</component>
-</project>

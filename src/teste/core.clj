@@ -30,8 +30,15 @@
 (defn sum-of-squares5 [v]
   (reduce + (map #(* % %) v)))
 
+(defn ^double sum-of-squares6 [^doubles v]
+  (reduce + (amap v idx _ (let [item (aget v idx)] (* item item)))))
+
+(defn ^double sum-of-squares7 [^doubles v]
+  (let [^doubles squares (amap v idx _ (let [item (aget v idx)] (* item item)))]
+    (areduce squares idx ret 0 (+ ret (aget squares idx)))))
+
+
 (def a (double-array (range 100000)))
-(def b (double-array (map #(* % %) a)))
 
 (comment
   (criterium/quick-bench (sum-of-squares a))
@@ -41,3 +48,7 @@
   (criterium/quick-bench (sum-of-squares3 a))
 
   (criterium/quick-bench (sum-of-squares4 a)))
+
+
+
+

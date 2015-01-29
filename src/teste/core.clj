@@ -17,7 +17,7 @@
     (if (neg? i)
       val
       (let [x (aget v i)]
-        (recur (+ val (* x x)) (dec i))))))
+        (recur (unchecked-add val (unchecked-multiply x x)) (dec i))))))
 
 (defn sum-of-squares3
   "Given a vector v, compute the sum of the squares of elements."
@@ -35,10 +35,20 @@
 
 (defn ^double sum-of-squares7 [^doubles v]
   (let [^doubles squares (amap v idx _ (let [item (aget v idx)] (* item item)))]
-    (areduce squares idx ret 0 (+ ret (aget squares idx)))))
+    (areduce squares idx ret 0.0 (+ ret (aget squares idx)))))
+
+(defn ^double sum-of-squares7 [^doubles v]
+  (areduce v idx ret 0.0
+           (let [item (aget v idx)]
+             (+ ret (* item item)))))
+
+(defn ^double sum-of-squares8 [^doubles v]
+  (areduce v idx ret 0.0
+           (let [item (aget v idx)]
+             (unchecked-add ret (unchecked-multiply item item)))))
 
 
-(def a (double-array (range 100000)))
+(def a (double-array (range 1000000)))
 
 (comment
   (criterium/quick-bench (sum-of-squares a))
